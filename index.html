@@ -1,0 +1,688 @@
+    <!DOCTYPE html>
+    <html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>حقنا في إنترنت غير محدود</title>
+        <style>
+            :root {
+                --primary-color: #60a5fa;
+                --primary-dark: #2563eb;
+                --primary-light: #93c5fd;
+                --text-color: #f3f4f6;
+                --text-light: #d1d5db;
+                --bg-color: #111827;
+                --section-bg: #1f2937;
+                --card-bg: #232b39;
+                --card-shadow: 0 10px 15px -3px rgba(0,0,0,0.3), 0 4px 6px -2px rgba(0,0,0,0.2);
+                --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                --border-radius: 1rem;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Cairo', sans-serif;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                transition: var(--transition);
+                line-height: 1.7;
+                font-size: 1.1rem;
+            }
+
+            .container {
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 0 1.5rem;
+            }
+
+            header {
+                background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+                color: white;
+                padding: 1.25rem 0;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1000;
+                box-shadow: var(--card-shadow);
+                backdrop-filter: blur(10px);
+            }
+
+            .header-bar {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+                padding: 1.25rem 0;
+            }
+
+            section {
+                padding: 8rem 0;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                position: relative;
+                overflow: hidden;
+                background-color: var(--section-bg);
+            }
+
+            section:nth-child(even) {
+                background-color: var(--bg-color);
+            }
+
+            .section-content {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 3rem;
+                background-color: var(--card-bg);
+                border-radius: var(--border-radius);
+                box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+                transform: translateY(0);
+                transition: var(--transition);
+                position: relative;
+                overflow: hidden;
+            }
+
+            h1, h2 {
+                margin-bottom: 2.5rem;
+                text-align: center;
+                color: var(--primary-color);
+                position: relative;
+                padding-bottom: 1.25rem;
+                font-size: 2.5rem;
+                letter-spacing: 1px;
+            }
+
+            h1::after, h2::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90px;
+                height: 4px;
+                background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+                border-radius: 2px;
+                opacity: 0.7;
+            }
+
+            .reasons-list {
+                list-style: none;
+                margin: 2.5rem 0;
+            }
+
+            .reasons-list li {
+                margin: 1.5rem 0;
+                padding: 2rem;
+                background-color: var(--card-bg);
+                border-radius: var(--border-radius);
+                box-shadow: 0 4px 24px rgba(33,150,243,0.08), 0 1.5px 4px rgba(0,0,0,0.08);
+                transition: var(--transition);
+                border-right: 4px solid var(--primary-color);
+                color: var(--text-light);
+                font-size: 1.15rem;
+            }
+
+            .reasons-list li:hover {
+                transform: translateX(-5px);
+                box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2), 0 10px 10px -5px rgba(0,0,0,0.08);
+                color: var(--primary-light);
+            }
+
+            .counter {
+                font-size: 5rem;
+                text-align: center;
+                color: var(--primary-color);
+                font-weight: bold;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+                animation: pulse 2s infinite;
+                margin: 2rem 0;
+            }
+
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+
+            .testimonials {
+                display: grid;
+                gap: 2rem;
+                margin: 2.5rem 0;
+            }
+
+            .testimonial {
+                background-color: var(--card-bg);
+                padding: 2rem;
+                border-radius: var(--border-radius);
+                box-shadow: 0 4px 24px rgba(33,150,243,0.08), 0 1.5px 4px rgba(0,0,0,0.08);
+                transition: var(--transition);
+                border-right: 6px solid var(--primary-light);
+                color: var(--text-light);
+            }
+
+            .testimonial strong {
+                color: var(--primary-light);
+                display: block;
+                margin-bottom: 1rem;
+                font-size: 1.25rem;
+            }
+
+            .testimonial-form {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            input, textarea {
+                padding: 1.25rem;
+                border: 2px solid transparent;
+                border-radius: var(--border-radius);
+                background-color: var(--section-bg);
+                color: var(--text-color);
+                transition: var(--transition);
+                font-size: 1.1rem;
+                width: 100%;
+            }
+
+            input:focus, textarea:focus {
+                outline: none;
+                border-color: var(--primary-color);
+                box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.1);
+            }
+
+            textarea {
+                min-height: 150px;
+                resize: vertical;
+            }
+
+            button {
+                background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+                color: white;
+                border: none;
+                padding: 1.25rem 2.5rem;
+                border-radius: var(--border-radius);
+                cursor: pointer;
+                transition: var(--transition);
+                font-size: 1.1rem;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                box-shadow: 0 2px 8px rgba(33,150,243,0.10);
+                position: relative;
+                overflow: hidden;
+            }
+
+            button:hover {
+                background: linear-gradient(90deg, var(--primary-dark), var(--primary-color));
+                box-shadow: 0 8px 24px rgba(33,150,243,0.18);
+                transform: translateY(-2px) scale(1.03);
+            }
+
+            footer {
+                background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+                color: white;
+                padding: 4rem 0;
+                text-align: center;
+                position: relative;
+                overflow: hidden;
+            }
+            footer p {
+                position: relative;
+                z-index: 1;
+                font-size: 1.25rem;
+            }
+            @media (max-width: 1024px) {
+                .container {
+                    padding: 0 2rem;
+                }
+                h1, h2 {
+                    font-size: 2rem;
+                }
+                .section-content {
+                    padding: 2rem;
+                }
+            }
+            @media (max-width: 900px) {
+                .nav-links {
+                    gap: 1.5rem;
+                    font-size: 1rem;
+                }
+            }
+            @media (max-width: 768px) {
+                .nav-links {
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 1rem;
+                }
+                .nav-links li {
+                    width: 100%;
+                    text-align: center;
+                }
+                section {
+                    padding: 6rem 0;
+                }
+                .section-content {
+                    padding: 1.5rem;
+                }
+                .counter {
+                    font-size: 3.5rem;
+                }
+                .reasons-list li,
+                .testimonial {
+                    padding: 1.5rem;
+                }
+                input, textarea {
+                    padding: 1rem;
+                }
+                button {
+                    padding: 1rem 2rem;
+                }
+            }
+            @media (max-width: 480px) {
+                .container {
+                    padding: 0 1rem;
+                }
+                h1, h2 {
+                    font-size: 1.75rem;
+                }
+                .counter {
+                    font-size: 3rem;
+                }
+                .section-content {
+                    padding: 1.25rem;
+                }
+            }
+            .opinion-card {
+                max-width: 600px;
+                min-width: 350px;
+                width: 60vw;
+            }
+            @media (max-width: 700px) {
+                .opinion-card {
+                    width: 100%;
+                    min-width: unset;
+                    max-width: 100%;
+                }
+            }
+            #burgerBtn {
+                display: flex;
+            }
+            @media (min-width: 1100px) {
+                .nav-links {
+                    position: static;
+                    background: none;
+                    flex-direction: row;
+                    min-height: unset;
+                    padding: 0;
+                    box-shadow: none;
+                    display: flex;
+                }
+                #burgerBtn {
+                    display: none !important;
+                }
+            }
+            /* Overlay for nav-links when burger is open */
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+                background: rgba(17,24,39,0.97);
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+                padding: 6rem 0 2rem 0;
+                z-index: 1500;
+                display: none;
+                min-height: 100vh;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+                transition: all 0.3s;
+            }
+            .nav-links.show {
+                display: flex !important;
+            }
+            .burger-btn {
+                position: absolute;
+                left: 1.5rem;
+                top: 1.2rem;
+                background: none;
+                border: none;
+                cursor: pointer;
+                z-index: 2000;
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                width: 44px;
+                height: 44px;
+                justify-content: center;
+                align-items: center;
+                display: flex !important;
+            }
+            .burger-btn .bar {
+                display: block;
+                width: 30px;
+                height: 4px;
+                background: #fff;
+                border-radius: 2px;
+                box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+                transition: 0.3s;
+            }
+            .burger-btn.active .bar:nth-child(1) {
+                transform: translateY(10px) rotate(45deg);
+            }
+            .burger-btn.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .burger-btn.active .bar:nth-child(3) {
+                transform: translateY(-10px) rotate(-45deg);
+            }
+            .header-bar {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+                padding: 1.25rem 0;
+            }
+            .burger-btn {
+                position: absolute;
+                left: 1.5rem;
+                top: 50%;
+                transform: translateY(-50%);
+                background: none;
+                border: none;
+                cursor: pointer;
+                z-index: 3000;
+                display: flex;
+                flex-direction: column;
+                gap: 7px;
+                width: 44px;
+                height: 44px;
+                justify-content: center;
+                align-items: center;
+            }
+            .burger-btn .bar {
+                display: block;
+                width: 32px;
+                height: 4px;
+                background: #fff;
+                border-radius: 2px;
+                box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+                transition: 0.3s;
+            }
+            .burger-btn.active .bar:nth-child(1) {
+                transform: translateY(10px) rotate(45deg);
+            }
+            .burger-btn.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .burger-btn.active .bar:nth-child(3) {
+                transform: translateY(-10px) rotate(-45deg);
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+                background: rgba(17,24,39,0.97);
+                padding: 6rem 0 2rem 0;
+                z-index: 1500;
+                min-height: 100vh;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+                transition: all 0.3s;
+            }
+            .nav-links.show {
+                display: flex !important;
+            }
+            @media (min-width: 1100px) {
+                .nav-links {
+                    position: static;
+                    background: none;
+                    flex-direction: row;
+                    min-height: unset;
+                    padding: 0;
+                    box-shadow: none;
+                    display: flex !important;
+                }
+            }
+            .divider {
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+                opacity: 0.15;
+                margin: 2.5rem 0;
+                border-radius: 2px;
+            }
+        </style>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <div class="header-bar">
+                <h1 style="color: #fff;">حقنا في إنترنت غير محدود</h1>
+            </div>
+        </header>
+
+        <main>
+
+            <section id="next-step">
+                <div class="section-content">
+                    <h2>الخطوة القادمة</h2>
+                    <div id="nextStepBox" style="text-align:center;color:var(--text-light);font-size:1.2rem;">جاري التحميل...</div>
+                </div>
+            </section>
+            <section id="news">
+                <div class="section-content">
+                    <h2>آخر الأخبار</h2>
+                    <div id="newsList"></div>
+                </div>
+            </section>  
+            <section id="goal">
+                <div class="section-content">
+                    <h2>هدف الحملة</h2>
+                    <p>نطالب بحقنا في إنترنت غير محدود في مصر. الإنترنت أصبح ضرورة أساسية في حياتنا اليومية، وليس من العدل أن ندفع أسعاراً مرتفعة مقابل خدمات محدودة.</p>
+                </div>
+            </section>
+            <section id="why">
+                <div class="section-content">
+                    <h2>ليه بنطالب؟</h2>
+                    <ul class="reasons-list">
+                        <li>الإنترنت أصبح ضرورة أساسية للتعليم والعمل</li>
+                        <li>الأسعار الحالية غير مناسبة للخدمة المقدمة</li>
+                        <li>الحدود الشهرية لا تكفي للاستخدام اليومي</li>
+                        <li>نريد مساواة مع باقي دول العالم في خدمات الإنترنت</li>
+                    </ul>
+                </div>
+            </section>
+                        <section id="help">
+                <div class="section-content">
+                    <h2>إزاي تساعد؟</h2>
+                    <ul class="reasons-list">
+                        <li>شارك الحملة على مواقع التواصل الاجتماعي</li>
+                        <li>اكتب رأيك وأضف صوتك</li>
+                        <li>شارك مع أصدقائك وعائلتك</li>
+                        <li>تابعنا على وسائل التواصل الاجتماعي</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="counter">
+                <div class="section-content">
+                    <h2>عدد المشاركين</h2>
+                    <div class="counter" id="participantsCount">5k</div>
+                </div>
+            </section>
+            <section id="testimonials">
+                <div class="section-content">
+                    <h2>آراء الناس</h2>
+                    <div class="testimonials" id="testimonialsList"></div>
+                </div>
+            </section>
+            <section id="share">
+                <div class="section-content opinion-card">
+                    <h2>اكتب رأيك</h2>
+                    <form class="testimonial-form" id="testimonialForm">
+                        <input type="text" id="name" placeholder="اسمك" required>
+                        <textarea id="opinion" placeholder="اكتب رأيك هنا" required></textarea>
+                        <button type="submit">إرسال</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-analytics.js";
+            import { getDatabase, ref, onValue, push, set } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-database.js";
+
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyA7irRW7MRem-LqsRYC1ec0czHSrLHM9Fg",
+                authDomain: "internet-e06fd.firebaseapp.com",
+                projectId: "internet-e06fd",
+                storageBucket: "internet-e06fd.firebasestorage.app",
+                messagingSenderId: "965722625487",
+                appId: "1:965722625487:web:7f3663a1daa05715f6eeba",
+                measurementId: "G-KCFCGDM45M"
+            };
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+            const database = getDatabase(app);
+
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Participants counter
+            const participantsRef = ref(database, 'participants/count');
+            onValue(participantsRef, (snapshot) => {
+                const count = snapshot.val() || 0;
+                document.getElementById('participantsCount').textContent = count;
+            });
+
+            // Testimonials
+            const testimonialsRef = ref(database, 'testimonials');
+            onValue(testimonialsRef, (snapshot) => {
+                const testimonialsList = document.getElementById('testimonialsList');
+                testimonialsList.innerHTML = '';
+                const testimonials = snapshot.val() || {};
+                const values = Object.values(testimonials).filter(t => t.verified === true);
+                if (!values.length) {
+                    testimonialsList.innerHTML = '<div style="text-align:center;color:var(--text-light);font-size:1.2rem;">لا يوجد آراء حاليا</div>';
+                    return;
+                }
+                values.forEach(testimonial => {
+                    const div = document.createElement('div');
+                    div.className = 'testimonial';
+                    // معالجة النص الطويل
+                    const maxLen = 120;
+                    let isLong = testimonial.text.length > maxLen;
+                    let shortText = testimonial.text.slice(0, maxLen);
+                    div.innerHTML = `
+                        <strong>${testimonial.name}</strong>
+                        <p class="testimonial-text" style="word-break: break-word; white-space: pre-line;">${isLong ? shortText + '...' : testimonial.text}</p>
+                        ${isLong ? '<button class="read-more-btn" style="margin-top:10px; background: none; color: var(--primary-color); border: none; cursor: pointer; font-size: 1rem;">عرض المزيد</button>' : ''}
+                    `;
+                    testimonialsList.appendChild(div);
+                    if(isLong) {
+                        const btn = div.querySelector('.read-more-btn');
+                        btn.addEventListener('click', function() {
+                            const p = div.querySelector('.testimonial-text');
+                            p.textContent = testimonial.text;
+                            btn.style.display = 'none';
+                        });
+                    }
+                });
+            }, (error) => {
+                const testimonialsList = document.getElementById('testimonialsList');
+                testimonialsList.innerHTML = '<div style="text-align:center;color:var(--text-light);font-size:1.2rem;">لا يوجد آراء حاليا</div>';
+            });
+
+            // Submit testimonial (إرسال الرأي إلى testimonials مع verified: false)
+            const testimonialForm = document.getElementById('testimonialForm');
+            testimonialForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const text = document.getElementById('opinion').value;
+                const newTestimonialRef = push(ref(database, 'testimonials'));
+                await set(newTestimonialRef, {
+                    name,
+                    text,
+                    timestamp: Date.now(),
+                    verified: false
+                });
+                testimonialForm.reset();
+                alert('تم إرسال رأيك بنجاح وسيتم مراجعته قبل النشر. شكراً لمشاركتك!');
+            });
+
+            // قسم الخطوة القادمة
+            import { onValue as onValue2, ref as ref2 } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-database.js";
+            const nextStepRef = ref2(database, 'nextStep');
+            onValue2(nextStepRef, (snapshot) => {
+                const box = document.getElementById('nextStepBox');
+                const data = snapshot.val();
+                if (!data) {
+                    box.innerHTML = '<span style="color:var(--text-light);">لا يوجد خطوة قادمة حاليا</span>';
+                    return;
+                }
+                box.innerHTML = `
+                    <div style="font-size:1.3rem;color:var(--primary-color);font-weight:bold;">${data.title || ''}</div>
+                    <div style="margin:1rem 0;">${data.desc || ''}</div>
+                    <div style="color:var(--primary-light);font-size:1rem;">${data.date ? 'الموعد: ' + data.date : ''}</div>
+                `;
+            }, (error) => {
+                document.getElementById('nextStepBox').innerHTML = '<span style="color:var(--text-light);">لا يوجد خطوة قادمة حاليا</span>';
+            });
+
+            // قسم آخر الأخبار
+            const newsRef = ref2(database, 'news');
+            onValue2(newsRef, (snapshot) => {
+                const newsList = document.getElementById('newsList');
+                newsList.innerHTML = '';
+                const news = snapshot.val() || {};
+                const values = Object.values(news).filter(item => (item && (item.title || '').trim() !== '' && (item.body || '').trim() !== ''));
+                if (!values.length) {
+                    newsList.innerHTML = '<div style="text-align:center;color:var(--text-light);font-size:1.2rem;">لا يوجد أخبار حاليا</div>';
+                    return;
+                }
+                values.sort((a,b)=>b.date.localeCompare(a.date));
+                values.forEach(item => {
+                    const div = document.createElement('div');
+                    div.style = 'background:var(--card-bg);margin-bottom:1.5rem;padding:1.5rem;border-radius:var(--border-radius);box-shadow:var(--card-shadow);';
+                    div.innerHTML = `
+                        <div style="font-size:1.1rem;color:var(--primary-color);font-weight:bold;">${item.title || ''}</div>
+                        <div style="color:var(--primary-light);font-size:0.95rem;margin-bottom:0.5rem;">${item.date || ''}</div>
+                        <div style="color:var(--text-light);font-size:1rem;">${item.body || ''}</div>
+                    `;
+                    newsList.appendChild(div);
+                });
+            }, (error) => {
+                document.getElementById('newsList').innerHTML = '<div style="text-align:center;color:var(--text-light);font-size:1.2rem;">لا يوجد أخبار حاليا</div>';
+            });
+        </script>
+    </body>
+    </html> 
